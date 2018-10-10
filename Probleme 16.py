@@ -1,7 +1,7 @@
 def solve(n=1000):
-    a=2**n
+    puissance=2**n
     S=0
-    while a!=0:
-        S+=a%10
-        a=a//10
+    while puissance!=0:
+        S+=puissance%10
+        puissance=puissance//10
     return S
