@@ -1,4 +1,4 @@
-def estlibre(t,ligne,colonne):#On vérifie que si une reine est en placée en [ligne,colonne] elle ne pourrait être capturée
+def estlibre(t,ligne,colonne):#On vérifie que si une reine est placée en [ligne,colonne] elle ne pourrait être capturée
 	ok=True
 	l,c=1,0
 	while ok and l<= ligne:
@@ -20,9 +20,9 @@ def afficher(l,n,compt):#On fait une fonction d'affichage qui s'adapte si l'éch
 		print(" ",end='')
 		for i in range(1,n+1):
 			if i==l[k]:
-				print("x  ",end='')
+				print("x  ",end='')#on placce une croix si la reine n'est pas présente
 			else:
-				print("o  ",end='')
+				print("o  ",end='')#un cercle si la reine est présente
 		print("")
 	print("   ",end='')
 	for k in range(n):
@@ -45,7 +45,7 @@ def placer(ligne,n,r,t,compt=0):#On applique une procédure récursive qui va te
 				t[ligne-1]=colonne
 				r[colonne-1]= 1#On tente la placement de la reine puisque le placement est possible
 				compt=placer(ligne+1,n,r,t,compt)
-				r[colonne-1]= 0#Le programme est terminé soit echec soit affichage on peut donc retenter une autre possiblité.
+				r[colonne-1]= 0#à ce stade le programme récursif est terminé par un echec ou par des affichages on peut donc retenter une autre possiblité pour cette même colonne.
 				t[ligne-1]= 0
 			colonne+=1
 	return compt #On garde la variable non mutable compt r et t sont mutables rien ne sert de les garder ici
