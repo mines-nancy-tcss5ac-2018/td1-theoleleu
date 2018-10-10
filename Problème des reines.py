@@ -1,4 +1,4 @@
-def estlibre(t,ligne,colonne):
+def estlibre(t,ligne,colonne):#On vérifie que si une reine est en placée en [ligne,colonne] elle ne pourrait être capturée
 	ok=True
 	l,c=1,0
 	while ok and l<= ligne:
@@ -10,9 +10,9 @@ def estlibre(t,ligne,colonne):
 
 
 
-def afficher(l,n,compt):
+def afficher(l,n,compt):#On fait une fonction d'affichage qui s'adapte si l'échiquier est de taille supérieure à 9 pour garder les colonnes alignées
 	compt+=1
-	print("Solution n�",compt)
+	print("Solution n°",compt)
 	for k in range(n):
 		print(k+1,end='')
 		if k<9:
@@ -33,24 +33,25 @@ def afficher(l,n,compt):
 	print("")
 
 
-def placer(ligne,n,r,t,compt=0):
-	if ligne > n:
+def placer(ligne,n,r,t,compt=0):#On applique une procédure récursive qui va tenter d'effectuer tous les placements possibles en ajoutant 
+	#reine par reine quand cela est possible selon la procédure estlibre çi-dessus
+	if ligne > n: #On a un compteur(compt qui dénombre les solutions
 		afficher(t,n,compt)
 		compt+=1
 	else:
 		colonne=1
 		while colonne <= n:
-			if r[colonne-1]==0 and estlibre(t,ligne,colonne):
+			if r[colonne-1]==0 and estlibre(t,ligne,colonne):#On vérifie que le placement suivant est possible (on vérifie qu'il n'y a pas déjà de reine dans la colonne pour gagner du temps.)
 				t[ligne-1]=colonne
-				r[colonne-1]= 1
-				compt,r,t=placer(ligne+1,n,r,t,compt)
-				r[colonne-1]= 0
+				r[colonne-1]= 1#On tente la placement de la reine puisque le placement est possible
+				compt=placer(ligne+1,n,r,t,compt)
+				r[colonne-1]= 0#Le programme est terminé soit echec soit affichage on peut donc retenter une autre possiblité.
 				t[ligne-1]= 0
 			colonne+=1
-	return compt,r,t
+	return compt #On garde la variable non mutable compt r et t sont mutables rien ne sert de les garder ici
 			
-def solve(n):
-	t=[0]*n
-	r=[0]*n
-	compt,r,t=placer(1,n,r,t)
-	print("Il y a ",compt,"solutions au probl�me des",n,"reines.")
+def solve(n):#Fonction solution
+	t=[0]*n#On crée un échiquier numéro de colonne
+	r=[0]*n#On crée un échiquier numéro de ligne
+	compt=placer(1,n,r,t)#On lance l'algorithme
+	print("Il y a ",compt,"solutions au problème des",n,"reines.")#On affiche le nombre de solutions.
