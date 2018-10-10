@@ -34,8 +34,8 @@ def afficher(l,n,compt):#On fait une fonction d'affichage qui s'adapte si l'éch
 
 
 def placer(ligne,n,r,t,compt=0):#On applique une procédure récursive qui va tenter d'effectuer tous les placements possibles en ajoutant 
-	#reine par reine quand cela est possible selon la procédure estlibre çi-dessus
-	if ligne > n: #On a un compteur(compt qui dénombre les solutions
+	#reine par reine quand cela est possible selon la procédure est libre ci-dessus
+	if ligne > n: #On a un compteur(compt) qui dénombre les solutions.
 		afficher(t,n,compt)
 		compt+=1
 	else:
